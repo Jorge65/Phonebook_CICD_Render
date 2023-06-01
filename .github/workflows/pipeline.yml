@@ -1,4 +1,4 @@
-name: Hello World 2
+name: Render deployment pipeline
 
 on:
   push:
@@ -7,10 +7,38 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
-  hello_world_job_2:
+  a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
-        run: |
-          echo "Hello World!"
-          echo ${{ github.event_name }}
+      - uses: actions/checkout@v3
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+  building_and_testing_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies 
+        run: npm install  
+      - name: Install frontend dependencies
+        run: npm run build:ui
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run test
+      - name: Render deployment
+        if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip') }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+
