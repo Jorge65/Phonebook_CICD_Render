@@ -39,7 +39,7 @@ var morgan = require('morgan')
 
 //let persons = [ ]
 
-console.log('...start. v3..')
+console.log('...start...')
 
 //app.use(morgan('tiny'))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :newperson'))
@@ -51,7 +51,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('1') // change this string to ensure a new version deployed
+  res.send('4') // change this string to ensure a new version deployed
 })
 
 app.get('/info', (request, response) => {
