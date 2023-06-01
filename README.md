@@ -9,7 +9,7 @@ This version implements both backend and frontend of phonebook application.
 In addition CI/CD practices are taken into use with GitHub Actions
 
 Application user interface:
-  - https://tbd--xxx.onrender.com
+  - https://https://phonebook-cicd-version.onrender.com
 
 The application requires the following environment variables to be defined:
 - MONGODB_URI=XXX
@@ -17,10 +17,14 @@ The application requires the following environment variables to be defined:
 
 
 Available API endpoints:
+- Health check
+    - https://https://phonebook-cicd-version.onrender.com/health
+- Version information
+    - https://https://phonebook-cicd-version.onrender.com/version
 - General Status Information
-    - https://tbd--xxx.onrender.com/info
+    - https://https://phonebook-cicd-version.onrender.com/info
 - Persons API (JSON)
-    - https://tbd--xxx.onrender.com/api/persons
+    - https://https://phonebook-cicd-version.onrender.com/api/persons
 - Person API
-    - https://tbd--xxx.com/api/persons/<id>
+    - https://https://phonebook-cicd-version.onrender.com/api/persons/<id>
 
