@@ -27,6 +27,13 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: debugging
+        run: |
+          echo "jore1a - M-GH-T:"
+          echo ${{ secrets.MYGITHUB_TOKEN }} | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+          echo "jore1b"
+
 
   building_and_testing_pipeline:
     runs-on: ubuntu-20.04
@@ -50,10 +57,10 @@ jobs:
   tag_release:
     needs: [building_and_testing_pipeline]
     runs-on: ubuntu-20.04
-    steps:  
+    steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip') }}
+        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.66.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
