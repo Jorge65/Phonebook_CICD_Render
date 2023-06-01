@@ -39,7 +39,7 @@ var morgan = require('morgan')
 
 //let persons = [ ]
 
-console.log('...start...')
+console.log('...start. v1..')
 
 //app.use(morgan('tiny'))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :newperson'))
