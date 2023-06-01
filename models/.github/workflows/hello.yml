@@ -1,0 +1,33 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+          echo ${{ github.event_name }}
+  now_it_is_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Now it is
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          date
+          echo ${{ github.event_name }}
+  
+  directory_content_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Directory content
+        if: ${{ github.event_name == 'pushh' }}
+        run: |
+          ls -l
+          echo ${{ github.event_name }}

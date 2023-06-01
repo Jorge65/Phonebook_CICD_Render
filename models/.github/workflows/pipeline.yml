@@ -1,0 +1,16 @@
+name: Hello World 2
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  hello_world_job_2:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+          echo ${{ github.event_name }}
