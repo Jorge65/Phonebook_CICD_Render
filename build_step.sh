@@ -9,4 +9,4 @@ npm install
 npm run build:ui
 
 # start application
-npm start
+#npm start
