@@ -63,7 +63,7 @@ jobs:
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
       - name: Tests failed
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: success()
         with:
           text: Failed tests
           severity: error
@@ -89,7 +89,7 @@ jobs:
 
       - name: Deployment failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: success()
         with:
           text: Failed deployment!
           severity: error
@@ -100,7 +100,7 @@ jobs:
 
       - name: Build cancel
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: cancelled()
+        if: success()
         with:
           text: Build cancelled!
           severity: warn
