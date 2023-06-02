@@ -83,7 +83,7 @@ jobs:
           text: New version deployed!
           severity: info
           description: Deployment to Render
-          details: to https://https://phonebook-cicd-version.onrender.com by ${{ github.event.pusher.name }}
+          details: to https://phonebook-cicd-version.onrender.com by ${{ github.event.pusher.name }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
@@ -124,5 +124,4 @@ jobs:
           DEFAULT_BUMP: patch
           WITH_V: true
 
-# collaborate invitation to mluukkai: https://github.com/Jorge65/Phonebook_CICD_Render/invitations
-# discord message: @Matti Luukkainen Please review PR for Fullstack Open task 11.21. Collaboration invite link: https://github.com/Jorge65/Phonebook_CICD_Render/invitations
+          
