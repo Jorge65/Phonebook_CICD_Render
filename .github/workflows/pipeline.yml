@@ -59,18 +59,18 @@ jobs:
           severity: info
           description: commit '${{ github.event.commits[0].message }}'
           details: by ${{ github.event.commits[0].committer.username }}
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Tests failed
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: failure()
         with:
           text: Failed tests
           severity: error
           description: commit '${{ github.event.commits[0].message }}'
           details: by ${{ github.event.commits[0].committer.username }}
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Render deployment
         if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip') }}
@@ -84,29 +84,29 @@ jobs:
           severity: info
           description: Deployment to Render
           details: to https://https://phonebook-cicd-version.onrender.com by ${{ github.event.pusher.name }}
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Deployment failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: failure()
         with:
           text: Failed deployment!
           severity: error
           description: commit ${{ github.event.commits[0].id }} by ${{ github.event.commits[0].committer.username }} broke the build
           details: commit '${{ github.event.commits[0].message }}'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Build cancel
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: cancelled()
         with:
           text: Build cancelled!
           severity: warn
           description: Test and deployment cancelled
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
    
 
 
