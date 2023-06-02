@@ -1,0 +1,34 @@
+name: URL health check
+
+on:
+
+  schedule:
+#    - cron: '0,5,10,15,20,25,30 3 * * *'
+    - cron: '0 3 * * 0'
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: URL Health Check
+        uses: Jtalk/url-health-check-action@v3.1
+        with: 
+          url: https://phonebook-cicd-version.onrender.com/health
+          max-attempts: 3
+          retry-delay: 30s
+
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
+        with:
+          severity: info
+          details: Healthcheck succeeded
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+          severity: error
+          details: Healthcheck failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
