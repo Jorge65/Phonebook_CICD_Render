@@ -123,3 +123,6 @@ jobs:
           DEFAULT_BRANCH: main
           DEFAULT_BUMP: patch
           WITH_V: true
+
+# collaborate invitation to mluukkai: https://github.com/Jorge65/Phonebook_CICD_Render/invitations
+# discord message: @Matti Luukkainen Please review PR for Fullstack Open task 11.21. Collaboration invite link: https://github.com/Jorge65/Phonebook_CICD_Render/invitations
